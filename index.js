@@ -50,12 +50,12 @@ while (seguirEligiendo === true) {
     } else if (producto === 4) {
         totalCompra = totalCompra + nietoSenetiner.precio
     } else {
-        producto = parseInt(prompt('Elige el que deseas comprar: 1.Las Tortugas - 2.Don Nicanor - 3.Patrimonial - 4.Nieto Senetiner'))
+        producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
         continue
     }
     decision = parseInt(prompt('Queres seguir comprando? 1.Si - 2.No'))
     if (decision === 1) {
-        producto = parseInt(prompt('Elige el que deseas comprar: 1.Las Tortugas - 2.Don Nicanor - 3.Patrimonial - 4.Nieto Senetiner'
+        producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'
         )
         )
     } else {
@@ -79,7 +79,7 @@ function creaProducto() {
     const prodManual = new Producto (4, prodNombre, prodPrecio, prodStock)
 
     productos.push(prodManual)
-    agregarCarrito()
+    
 }
 
 creaProducto()
