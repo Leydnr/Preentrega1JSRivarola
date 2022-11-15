@@ -1,12 +1,6 @@
-/*PRIMERA PREENTREGA JS<
-    Muestreo
-    Determinar el uso de redes  
-    Se quiere determinar cuantas horas usan las redes en las distintas edades
-    Se realizara
-    -- valor promedio de datos ingresados
-    -- valor promedio por edad
-    --valor promedio de horas*/
-
+/*SEGUNDA PREENTREGA JS
+Empezar con carrito de compras para incluirlo al proyecto final de DW
+*/
 function saludoGenerico() {
     let nombreUsuario = prompt("Cual es tu nombre")
     let apellidoUsuario = prompt("Cual es tu apellido")
@@ -16,29 +10,51 @@ function saludoGenerico() {
 alert("Bienvenido")
 saludoGenerico()
 
+class Producto {
+    constructor(id, nombre, precio,stock) {
+        this.id = id;
+        this.nombre = nombre
+        this.precio = precio
+        this.stock = stock
+    }
+    restaStock(){
+        this.stock = this.stock - 1;
+        console.log(`El Stock de {this.nombre} ha sido actualizado`)
+    }
+}
 
-let smartPhone = parseInt(prompt('Elige el modelo que deseas comprar: 1.Samsung A23 - 2.Samsung A03 - 3.Samsung S21 4.Samsung S22'))
+const lasTortugas  = new Producto(0, 'Las Tortugas', 1000, 15);
+const donNicanor = new Producto(1, 'Don Nicanor', 1200,30);
+const patrimonial  = new Producto(2, 'Patrimonial', 1500,40);
+const nietoSenetiner  = new Producto(3, 'Nieto Senetiner', 2000,10);
+
+const productos = [lasTortugas, donNicanor,patrimonial,nietoSenetiner];
+
+const carrito = []
+let producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
 
 let totalCompra = 0
 let seguirEligiendo = true
 let decision
 
+const stock = []
+
 while (seguirEligiendo === true) {
-    if (smartPhone === 1) {
-        totalCompra = totalCompra + 70000
-    } else if (smartPhone === 2) {
-        totalCompra = totalCompra + 20000
-    } else if (smartPhone === 3) {
-        totalCompra = totalCompra + 150000
-    } else if (smartPhone === 4) {
-        totalCompra = totalCompra + 200000
+    if (producto === 1) {
+        totalCompra = totalCompra + lasTortugas.precio
+    } else if (producto === 2) {
+        totalCompra = totalCompra + donNicanor.precio
+    } else if (producto === 3) {
+        totalCompra = totalCompra + patrimonial.precio
+    } else if (producto === 4) {
+        totalCompra = totalCompra + nietoSenetiner.precio
     } else {
-        smartPhone = parseInt(prompt('Elige la opción habilitada: 1.Samsung A23 - 2.Samsung A03 - 3.Samsung S21 4.Samsung S22'))
+        producto = parseInt(prompt('Elige el que deseas comprar: 1.Las Tortugas - 2.Don Nicanor - 3.Patrimonial - 4.Nieto Senetiner'))
         continue
     }
     decision = parseInt(prompt('Queres seguir comprando? 1.Si - 2.No'))
     if (decision === 1) {
-        smartPhone = parseInt(prompt('Elige el modelo que deseas comprar: 1.Samsung A23 - 2.Samsung A03 - 3.Samsung S21 4.Samsung S22'
+        producto = parseInt(prompt('Elige el que deseas comprar: 1.Las Tortugas - 2.Don Nicanor - 3.Patrimonial - 4.Nieto Senetiner'
         )
         )
     } else {
@@ -49,28 +65,6 @@ while (seguirEligiendo === true) {
 
 alert(`El total se tu compra es ${totalCompra}`)
 
-alert(`Si podes contesta una pequeña encuesta`)
 
-function calcularHoras(r1, r2, r3, r4) {
-    let sumaHoras = r1 + r2 + r3 + r4
-    let promedio = sumaHoras / 4
 
-    if (promedio >= 7) {
-        alert(`El tiempo de uso es muy alto`)
-    } else if (promedio > 4) {
-        alert(`El tiempo de uso es medio`)
-    } else {
-        alert(`El tiempo de uso es bajo`)
-    }
-}
-let redes = prompt("Ingrese la cantidad de horas que utiliza el celular ")
-
-for (let i = 0; i <= 4; i++) {
-    let redes1 = prompt("Ingrese cuantas horas usa Facebook")
-    let redes2 = prompt("Ingrese cuantas horas usa Instagram")
-    let redes3 = prompt("Ingrese cuantas horas usa Twitter")
-    let redes4 = prompt("Ingrese cuantas horas usa Tik tok")
-    calcularHoras(redes1, redes2, redes3, redes4)
-    alert(`Muchas gracias por contestar`)
-}
-
+stock.push(nietoSenetiner)
