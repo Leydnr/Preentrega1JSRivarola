@@ -44,20 +44,21 @@ console.log(resultado)
 
 while (seguirEligiendo === true) {
 
-    const productoCliente = productos.find(producto => producto.id === productos)
+    const productoCliente = productos.find(producto => producto.id === productoSeleccionado
+        )
     
-    if (producto === 1) {
-        totalCompra = totalCompra + lasTortugas.precio
-    } else if (producto === 2) {
-        totalCompra = totalCompra + donNicanor.precio
-    } else if (producto === 3) {
-        totalCompra = totalCompra + patrimonial.precio
-    } else if (producto === 4) {
-        totalCompra = totalCompra + nietoSenetiner.precio
+    if (productoCliente) {
+        totalCompra = totalCompra + productoCliente.precio
+    
     } else {
-        producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
+        productoSeleccionado = parseInt
+        (prompt(
+            'Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'
+            )
+        )
         continue
     }
+    console.log(productoCliente)
     decision = parseInt(prompt('Queres seguir comprando? 1.Si - 2.No'))
     if (decision === 1) {
         producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'
@@ -86,8 +87,4 @@ function creaProducto() {
     productos.push(prodManual)
 
 }
-
-
-
-
 creaProducto()
