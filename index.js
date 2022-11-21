@@ -10,7 +10,7 @@ alert("Bienvenido")
 saludoGenerico()
 
 const carrito = []
-let producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
+let productoSeleccionado = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
 
 let totalCompra = 0
 let seguirEligiendo = true
