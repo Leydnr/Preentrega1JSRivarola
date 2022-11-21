@@ -4,13 +4,12 @@ Empezar con carrito de compras para incluirlo al proyecto final de DW
 function saludoGenerico() {
     let nombreUsuario = prompt("Cual es tu nombre")
     let apellidoUsuario = prompt("Cual es tu apellido")
-    let aniosUsuario = parseInt(prompt("Cuantos años tenés"))
     alert(`Hola ${nombreUsuario} ${apellidoUsuario}`)
 }
 alert("Bienvenido")
 saludoGenerico()
 
-
+const carrito = []
 let producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
 
 let totalCompra = 0
@@ -26,87 +25,51 @@ class Producto {
         this.precio = precio
         this.stock = stock
     }
-    restaStock(){
-        this.stock = this.stock - 1;
-        console.log(`El Stock de ${this.nombre} ha sido actualizado`)
-    }
 }
 
 const lasTortugas = new Producto(0, 'Las Tortugas', 1000, 15);
+stock.push(lasTortugas)
 const donNicanor = new Producto(1, 'Don Nicanor', 1200, 30);
+stock.push(donNicanor)
 const patrimonial = new Producto(2, 'Patrimonial', 1500, 40);
+stock.push(patrimonial)
 const nietoSenetiner = new Producto(3, 'Nieto Senetiner', 2000, 10);
+stock.push(nietoSenetiner)
 
 const productos = [lasTortugas, donNicanor, patrimonial, nietoSenetiner];
 console.log(productos)
-const carrito = []
 
-let productosOfrecidos = "Tenemos para ofrecerle: "
+const resultado = productos.filter((el)=> el.precio < 1500) 
+console.log(resultado)
 
-function validaDato(respuestaUsuario){
-    while(isNaN(respuestaUsuario)){
-        alert("Por favor ingrese sólo números")
-        respuesta = parseInt(prompt(productosOfrecidos)) 
+while (seguirEligiendo === true) {
+
+    const productoCliente = productos.find(producto => producto.id === productos)
+    
+    if (producto === 1) {
+        totalCompra = totalCompra + lasTortugas.precio
+    } else if (producto === 2) {
+        totalCompra = totalCompra + donNicanor.precio
+    } else if (producto === 3) {
+        totalCompra = totalCompra + patrimonial.precio
+    } else if (producto === 4) {
+        totalCompra = totalCompra + nietoSenetiner.precio
+    } else {
+        producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
+        continue
     }
-    return respuesta
-}
-function agregaCarrito(){
-    for (item of productos){
-        productosOfrecidos +=  ` \n ${item.id} - ${item.nombre} a tan solo $ ${item.precio}`
-    }
-
-    productosOfrecidos += `\n Ingrese el nro de Item que desea agregar a su carrito. Para finalizar ingrese 10`
-
-    let respuesta = parseInt(prompt(productosOfrecidos)) 
-
-
-    let respuestaValidada = validaDato(respuesta)
-
-    while(respuestaValidada != 10){
-      
-        switch(respuestaValidada){
-            case 0: 
-                carrito.push(productos[0])
-                alert(`Agregamos al carrito el producto ${productos[0].nombre}`)
-                productos[0].restaStock()
-                break;
-            case 1:
-                carrito.push(productos[1])
-                alert(`Agregamos al carrito el producto ${productos[1].nombre}`)
-                productos[1].restaStock()
-                break;
-            case 2:
-                carrito.push(productos[2])
-                alert(`Agregamos al carrito el producto ${productos[2].nombre}`)
-                productos[2].restaStock()
-                break;
-            case 3:
-                carrito.push(productos[3])
-                alert(`Agregamos al carrito el producto ${productos[3].nombre}`)
-                productos[3].restaStock()
-                break;
-            default:
-                alert(`No lo tenemos en stock `)
-                break;
-        }
-        respuesta = parseInt(prompt(productosOfrecidos))
-    }
-    alert("Cerramos tu pedido")
-    mostrarCarrito()
-}   
-let productosCarrito = `Vas a llevar: `
-let precioCarrito = 0
-agregaCarrito()
-
-function mostrarCarrito(){
-    for (itemsElegidos of carrito){
-        productosCarrito += `\n - ${itemsElegidos.nombre}`
-        precioCarrito += itemsElegidos.precio
+    decision = parseInt(prompt('Queres seguir comprando? 1.Si - 2.No'))
+    if (decision === 1) {
+        producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'
+        )
+        )
+    } else {
+        seguirEligiendo = false
     }
 
-    alert(`Repasemos: \n ${productosCarrito} \n Por un total de ${precioCarrito}`)
 }
 
+alert(`El total se tu compra es ${totalCompra}`)
 
 function creaProducto() {
     let prodNombre = prompt("Nombre del producto a crear")
@@ -121,8 +84,9 @@ function creaProducto() {
     const prodManual = new Producto(4, prodNombre, prodPrecio, prodStock)
 
     productos.push(prodManual)
-    agregaCarrito()
+
 }
+
 
 
 
