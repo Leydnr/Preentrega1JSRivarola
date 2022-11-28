@@ -1,76 +1,90 @@
-/*SEGUNDA PREENTREGA JS
+/*TERCERA PREENTREGA JS
 Empezar con carrito de compras para incluirlo al proyecto final de DW
 */
-function saludoGenerico() {
-    let nombreUsuario = prompt("Cual es tu nombre")
-    let apellidoUsuario = prompt("Cual es tu apellido")
-    alert(`Hola ${nombreUsuario} ${apellidoUsuario}`)
-}
-alert("Bienvenido")
-saludoGenerico()
+// function saludoGenerico() {
+// let nombreUsuario = prompt("Cual es tu nombre")
+// let apellidoUsuario = prompt("Cual es tu apellido")
+// alert(`Hola ${nombreUsuario} ${apellidoUsuario}`)
+// }
+// alert("Bienvenido")
+// saludoGenerico()
 
-const carrito = []
-let productoSeleccionado = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'))
-
-let totalCompra = 0
-let seguirEligiendo = true
-let decision
-
-const stock = []
-
-class Producto {
+class Produc {
     constructor(id, nombre, precio, stock) {
         this.id = id;
-        this.nombre = nombre
-        this.precio = precio
-        this.stock = stock
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.imagen = this.imagen;
     }
 }
 
-const lasTortugas = new Producto(0, 'Las Tortugas', 1000, 15);
-stock.push(lasTortugas)
-const donNicanor = new Producto(1, 'Don Nicanor', 1200, 30);
-stock.push(donNicanor)
-const patrimonial = new Producto(2, 'Patrimonial', 1500, 40);
-stock.push(patrimonial)
-const nietoSenetiner = new Producto(3, 'Nieto Senetiner', 2000, 10);
-stock.push(nietoSenetiner)
+const producto0 = new Produc(0, 'Las Tortugas', 1000, 15,"");
+const producto1 = new Produc(1, 'Don Nicanor', 1200, 30,"");
+const producto2 = new Produc(2, 'Patrimonial', 1500, 40,"");
+const producto3 = new Produc(3, 'Nieto Senetiner', 2000, 10,"");
 
-const productos = [lasTortugas, donNicanor, patrimonial, nietoSenetiner];
-console.log(productos)
+const productos = [producto0, producto1, producto2, producto3];
 
-const resultado = productos.filter((el)=> el.precio < 1500) 
-console.log(resultado)
 
-while (seguirEligiendo === true) {
+const divProductos = document.getElementById('divProductos')
+productos.forEach(producto => {
+    divProductos.innerHTML += `
+    <div id="${producto.id}" class="card cardProd" >
+    <img src="..." class="card-img-top" alt="">
+    <div class="card-body">
+    <h2 class="card-tittle">${producto.nombre}</h2>
+    <p class="card-text">${producto.precio}</p>
+    <button id=${producto.id} class="btn btn-primary">AGREGAR</button>
+    </div>
+    </div> 
+    `
+})
 
-    const productoCliente = productos.find(producto => producto.id === productoSeleccionado
+const carrito = JSON.parse (localStorage.getItem('carrito')) || []
+console.log(carrito)
+
+const botonesAgregar = document.querySelectorAll('.btn-primary')
+// console.log(botonesAgregar)
+
+botonesAgregar.forEach(boton => {
+    boton.onclick = () => {
+        const productoSeleccionado = productos.find(prod => prod.id === parseInt(boton.id))
+        console.log(productoSeleccionado)
+
+        const productoCarrito = { ...productoSeleccionado, cantidad: 1 }
+        console.log(productoSeleccionado, productoCarrito)
+
+        const indexCarrito = carrito.findIndex(
+            (prod) => prod.id === productoCarrito.id
         )
-    
-    if (productoCliente) {
-        totalCompra = totalCompra + productoCliente.precio
-    
-    } else {
-        productoSeleccionado = parseInt
-        (prompt(
-            'Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'
-            )
-        )
-        continue
+        if (indexCarrito === -1) {
+            carrito.push(productoCarrito)
+        } else {
+            carrito[indexCarrito].cantidad++
+        }
+        localStorage.setItem('carrito',JSON.stringify(carrito))
+        console.log(carrito)
     }
-    console.log(productoCliente)
-    decision = parseInt(prompt('Queres seguir comprando? 1.Si - 2.No'))
-    if (decision === 1) {
-        producto = parseInt(prompt('Elige el que deseas comprar: 0.Las Tortugas - 1.Don Nicanor - 2.Patrimonial - 3.Nieto Senetiner'
-        )
-        )
-    } else {
-        seguirEligiendo = false
-    }
+
+})
+
+const botonFinalizar = document.querySelector('#finalizar')
+botonFinalizar.onclick = ()=> {
+    const valores = carrito.map(prod=>prod.precio * prod.cantidad)
+    const totalCompra = 0
+    valores.forEach(valor=>{
+        totalCompra += valor
+    })
+    console.log(totalCompra)
+    console.log(valores)
 
 }
-
 alert(`El total se tu compra es ${totalCompra}`)
+
+
+
+
 
 function creaProducto() {
     let prodNombre = prompt("Nombre del producto a crear")
@@ -87,4 +101,4 @@ function creaProducto() {
     productos.push(prodManual)
 
 }
-creaProducto()
+//creaProducto()
